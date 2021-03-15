@@ -15,6 +15,7 @@ const app = express();
 app.use(cors())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+require("./router/api")(app);
 
 // It's go time
 app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`));
