@@ -21,6 +21,12 @@ module.exports = function (router) {
     });
 
     router.post("/projects/all", auth, function (req, res) {
-
+        db.Project.sync({ force: true })
+            .then(() => db.Project.bulkCreate(req.body))
+            .then(() => res.status(200).end())
+            .catch(err => {
+                console.error(err);
+                res.status(400).end();
+            });
     });
 };
