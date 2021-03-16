@@ -20,16 +20,21 @@ module.exports = function (router) {
             });
     });
 
-    router.delete("/messages/:id", auth, function (req, res) {
-        db.Message.destroy({ where: { id: Number(req.params.id) } })
-            .then(data => res.status(200).json(data))
+    router.delete("/messages/all", auth, function (req, res) {
+        db.Message.sync({ force: true })
+            .then(() => res.status(200).end())
             .catch(err => {
                 console.error(err);
                 res.status(400).end();
             });
     });
 
-    router.delete("/messages/all", auth, function (req, res) {
-
+    router.delete("/messages/:id", auth, function (req, res) {
+        db.Message.destroy({ where: { id: Number(req.params.id) } })
+            .then(() => res.status(200).end())
+            .catch(err => {
+                console.error(err);
+                res.status(400).end();
+            });
     });
 };
