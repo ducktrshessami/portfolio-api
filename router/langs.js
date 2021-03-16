@@ -16,7 +16,7 @@ module.exports = function (router) {
             });
     });
 
-    router.post("/langs", function (req, res) {
+    router.post("/langs", auth, function (req, res) {
         db.Lang.create(req.body)
             .then(data => res.status(200).json(data))
             .catch(err => {
@@ -25,7 +25,7 @@ module.exports = function (router) {
             });
     });
 
-    router.put("/langs/:name", function (req, res) {
+    router.put("/langs/:name", auth, function (req, res) {
         db.Lang.update(req.body, { where: { name: req.params.name } })
             .then(([data]) => assert(data))
             .then(() => res.status(200).end())
@@ -35,7 +35,7 @@ module.exports = function (router) {
             });
     });
 
-    router.delete("/langs/:name", function (req, res) {
+    router.delete("/langs/:name", auth, function (req, res) {
         db.Lang.destroy({ where: { name: req.params.name } })
             .then(data => assert(data))
             .then(() => res.status(200).end())
