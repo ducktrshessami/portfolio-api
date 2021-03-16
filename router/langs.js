@@ -23,4 +23,13 @@ module.exports = function (router) {
                 res.status(500).end();
             });
     });
+
+    router.delete("/langs/:name", function (req, res) {
+        db.Lang.destroy({ where: { name: req.params.name } })
+            .then(() => res.status(200).end())
+            .catch(err => {
+                console.error(err);
+                res.status(500).end();
+            });
+    });
 };
