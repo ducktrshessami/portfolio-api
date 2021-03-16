@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const fs = require("fs");
-const path = require("fs");
+const path = require("path");
 
 const router = Router();
 const basename = path.basename(__filename);
