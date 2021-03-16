@@ -1,8 +1,13 @@
 const crypto = require("crypto");
 
-module.exports = function (key = "") {
+module.exports = function (req, res, next) {
     let hash = crypto.createHash("sha256")
-        .update(key + process.env.SALT)
+        .update(req.query.key + process.env.SALT)
         .digest("hex");
-    return hash === process.env.KEYHASH;
+    if (hash === process.env.KEYHASH) {
+        next();
+    }
+    else {
+        res.status(401).end();
+    }
 };
