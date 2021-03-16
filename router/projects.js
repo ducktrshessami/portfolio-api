@@ -3,7 +3,12 @@ const auth = require("../middleware/auth");
 
 module.exports = function (router) {
     router.get("/projects", function (req, res) {
-
+        db.Project.findAll({ order: [["id", "asc"]] })
+            .then(data => res.status(200).json(data))
+            .catch(err => {
+                console.error(err);
+                res.status(500).end();
+            });
     });
 
     router.post("/projects", auth, function (req, res) {
