@@ -21,7 +21,12 @@ module.exports = function (router) {
     });
 
     router.delete("/messages/:id", auth, function (req, res) {
-
+        db.Message.destroy({ where: { id: Number(req.params.id) } })
+            .then(data => res.status(200).json(data))
+            .catch(err => {
+                console.error(err);
+                res.status(400).end();
+            });
     });
 
     router.delete("/messages/all", auth, function (req, res) {
