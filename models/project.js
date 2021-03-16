@@ -14,10 +14,22 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Project.init({
-    title: DataTypes.STRING,
-    description: DataTypes.STRING,
-    langs: DataTypes.ARRAY,
-    url: DataTypes.STRING
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    description: {
+      type: DataTypes.STRING,
+      defaultValue: ""
+    },
+    langs: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: false
+    },
+    url: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
   }, {
     sequelize,
     modelName: 'Project',
