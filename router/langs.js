@@ -1,3 +1,4 @@
+const assert = require("assert");
 const db = require("../models");
 
 module.exports = function (router) {
@@ -24,12 +25,23 @@ module.exports = function (router) {
             });
     });
 
-    router.delete("/langs/:name", function (req, res) {
-        db.Lang.destroy({ where: { name: req.params.name } })
+    router.put("/langs/:name", function (req, res) {
+        db.Lang.update(req.body, { where: { name: req.params.name } })
+            .then(([data]) => assert(data))
             .then(() => res.status(200).end())
             .catch(err => {
                 console.error(err);
-                res.status(500).end();
+                res.status(400).end();
+            });
+    });
+
+    router.delete("/langs/:name", function (req, res) {
+        db.Lang.destroy({ where: { name: req.params.name } })
+            .then(data => assert(data))
+            .then(() => res.status(200).end())
+            .catch(err => {
+                console.error(err);
+                res.status(400).end();
             });
     });
 };
