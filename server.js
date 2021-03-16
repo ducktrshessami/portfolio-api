@@ -26,4 +26,3 @@ db.sequelize.sync()
         });
     })
     .catch(console.error);
-
