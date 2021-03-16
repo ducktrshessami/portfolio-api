@@ -10,11 +10,19 @@ module.exports = function (app) {
 
     });
 
+    app.post("/projects/all", auth, function (req, res) {
+
+    });
+
     app.get("/messages", auth, function (req, res) {
 
     });
 
     app.post("/messages", function (req, res) {
+
+    });
+
+    app.delete("/messages/:id", auth, function (req, res) {
 
     });
 };
