@@ -1,3 +1,4 @@
+const db = require("../models");
 const auth = require("../middleware/auth");
 
 module.exports = function (app) {
@@ -5,11 +6,15 @@ module.exports = function (app) {
 
     });
 
-    app.get("/message", auth, function(req, res) {
-        
+    app.post("/projects", auth, function (req, res) {
+
     });
 
-    app.post("/message", function (req, res) {
+    app.get("/messages", auth, function (req, res) {
+
+    });
+
+    app.post("/messages", function (req, res) {
 
     });
 };
