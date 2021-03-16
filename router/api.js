@@ -25,4 +25,8 @@ module.exports = function (app) {
     app.delete("/messages/:id", auth, function (req, res) {
 
     });
+
+    app.delete("/messages/all", auth, function (req, res) {
+
+    });
 };
