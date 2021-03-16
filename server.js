@@ -16,7 +16,7 @@ const app = express();
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-require("./router/api")(app);
+app.use(require("./router"));
 
 // It's go time
 db.sequelize.sync()
