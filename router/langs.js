@@ -1,5 +1,6 @@
 const assert = require("assert");
 const db = require("../models");
+const auth = require("../middleware/auth");
 
 module.exports = function (router) {
     router.get("/langs", function (req, res) {
