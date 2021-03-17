@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      models.Project.belongsToMany(models.Lang, { through: "ProjectLangs" });
     }
   };
   Project.init({
@@ -21,10 +21,6 @@ module.exports = (sequelize, DataTypes) => {
     description: {
       type: DataTypes.STRING,
       defaultValue: ""
-    },
-    langs: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
-      allowNull: false
     },
     url: {
       type: DataTypes.STRING,
