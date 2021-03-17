@@ -3,7 +3,10 @@ const auth = require("../middleware/auth");
 
 module.exports = function (router) {
     router.get("/messages", auth, function (req, res) {
-        db.Message.findAll({ order: [["createdAt", "asc"]] })
+        db.Message.findAll({
+            order: [["createdAt", "asc"]],
+            attributes: ["name", "email", "message"]
+        })
             .then(data => res.status(200).json(data))
             .catch(err => {
                 console.error(err);

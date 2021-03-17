@@ -4,7 +4,7 @@ const auth = require("../middleware/auth");
 
 module.exports = function (router) {
     router.get("/langs", function (req, res) {
-        db.Lang.findAll()
+        db.Lang.findAll({ attributes: ["name", "image"] })
             .then(data => {
                 let foo = {};
                 data.forEach(lang => foo[lang.name] = lang.image);
