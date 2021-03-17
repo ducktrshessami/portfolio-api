@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(require("./router"));
 
 // It's go time
-db.sequelize.sync()
+db.sequelize.sync({ force: process.env.DB_FORCE })
     .then(() => {
         app.listen(PORT, () => {
             console.log(`Listening on PORT ${PORT}`);
