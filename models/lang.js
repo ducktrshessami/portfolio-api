@@ -14,8 +14,15 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Lang.init({
-    name: DataTypes.STRING,
-    image: DataTypes.STRING
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: { isUrl: true }
+    }
   }, {
     sequelize,
     modelName: 'Lang',
