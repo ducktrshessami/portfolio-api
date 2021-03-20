@@ -19,7 +19,16 @@ module.exports = function (router) {
 
     router.post("/langs", auth, function (req, res) {
         db.Lang.create(req.body)
-            .then(data => res.status(200).json(data))
+            .then(() => res.status(200).end())
+            .catch(err => {
+                console.error(err);
+                res.status(500).end();
+            });
+    });
+
+    router.post("/langs/bulk", auth, function (req, res) {
+        db.Lang.bulkCreate(req.body)
+            .then(() => res.status(200).end())
             .catch(err => {
                 console.error(err);
                 res.status(500).end();
