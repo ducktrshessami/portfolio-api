@@ -54,4 +54,13 @@ module.exports = function (router) {
                 res.status(400).end();
             });
     });
+
+    router.delete("/langs/all", auth, function (req, res) {
+        db.Lang.sync({ force: true })
+            .then(() => res.status(200).end())
+            .catch(err => {
+                console.error(err);
+                res.status(500).end();
+            });
+    });
 };
