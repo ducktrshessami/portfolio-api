@@ -12,6 +12,16 @@ const mailer = createTransport({
     }
 });
 
+function generateHtml(name, message) {
+    return `<article>
+        <h3>${name}</h3>
+        ${message.split("\n")
+            .map(line => `<p>${line}</p>`)
+            .join("\n")
+        }
+    </article>`;
+}
+
 function findError({ name, email, message }) {
     if (!process.env.MAILER_ENABLED) {
         return "Messages are currently disabled";
@@ -25,10 +35,6 @@ function findError({ name, email, message }) {
     if (!message.trim()) {
         return "Enter a message";
     }
-}
-
-function generateHtml(name, message) {
-
 }
 
 module.exports = function (router) {
