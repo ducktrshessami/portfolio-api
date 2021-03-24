@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      models.Lang.belongsToMany(models.Project, { through: "ProjectLangs" });
+      // define association here
     }
   };
   Lang.init({
