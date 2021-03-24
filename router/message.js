@@ -1,6 +1,6 @@
 const { createTransport } = require("nodemailer");
 
-const transport = createTransport({
+const mailer = createTransport({
     host: process.env.MAILER_HOST,
     secure: true,
     auth: {
@@ -12,13 +12,32 @@ const transport = createTransport({
     }
 });
 
+function findError({ name, email, message }) {
+    if (!name) {
+        return "Enter a name";
+    }
+    if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
+        return "Enter a valid E-mail address";
+    }
+    if (!message) {
+        return "Enter a message";
+    }
+}
+
 module.exports = function (router) {
     router.post("/message", function (req, res) {
-        db.Message.create(req.body)
-            .then(data => res.status(200).json(data))
-            .catch(err => {
-                console.error(err);
-                res.status(500).end();
-            });
+        let validationError;
+        if (validationError = findError(req.body)) {
+            res.status(400).end(validationError);
+        }
+        else {
+            mailer.sendMail({
+
+            })
+                .catch(err => {
+                    console.error(err);
+                    res.status(500).end();
+                });
+        }
     });
 };
