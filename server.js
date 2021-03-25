@@ -7,7 +7,6 @@ catch {
 
 const express = require("express");
 const cors = require("cors");
-const db = require("./models");
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -19,10 +18,6 @@ app.use(express.json());
 app.use(require("./router"));
 
 // It's go time
-db.sequelize.sync({ force: process.env.DB_FORCE })
-    .then(() => {
-        app.listen(PORT, () => {
-            console.log(`Listening on PORT ${PORT}`);
-        });
-    })
-    .catch(console.error);
+app.listen(PORT, () => {
+    console.log(`Listening on PORT ${PORT}`);
+});
