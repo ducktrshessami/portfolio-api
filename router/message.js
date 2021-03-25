@@ -12,9 +12,10 @@ const mailer = createTransport({
     }
 });
 
-function generateHtml(name, message) {
+function generateHtml(name, email, message) {
     return `<article>
         <h3>${name}</h3>
+        <h4><a href="mailto:${email}">${email}</a></h4>
         ${message.split("\n")
             .map(line => `<p>${line}</p>`)
             .join("\n")
@@ -52,8 +53,8 @@ module.exports = function (router) {
                 to: process.env.MAILER_DESTINATION,
                 replyTo: email,
                 subject: `Portfolio message from ${name}`,
-                text: `${name}\n${message}`,
-                html: generateHtml(name, message)
+                text: `${name}\n${email}\n${message}`,
+                html: generateHtml(name, email, message)
             })
                 .then(() => res.status(200).end())
                 .catch(err => {
