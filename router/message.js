@@ -23,7 +23,7 @@ function generateHtml(name, email, message) {
     </article>`;
 }
 
-function findError({ name, email, message }) {
+function findError({ name = "", email = "", message = "" }) {
     if (!process.env.MAILER_ENABLED) {
         return "Messages are currently disabled";
     }
