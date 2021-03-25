@@ -4,7 +4,7 @@ const octokit = new Octokit({ auth: process.env.GIST_TOKEN });
 
 module.exports = function (router) {
     router.get("/projects", function (req, res) {
-        octokit.gists.get({ gist_id: process.env.GIST_ID })
+        octokit.gists.get({ gist_id: process.env.GIST_PROJECTS })
             .then(data => res.status(200).json(data))
             .catch(err => {
                 console.error(err);
