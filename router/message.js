@@ -55,6 +55,7 @@ module.exports = function (router) {
                 text: `${name}\n${message}`,
                 html: generateHtml(name, message)
             })
+                .then(() => res.status(200).end())
                 .catch(err => {
                     console.error(err);
                     res.status(500).end();
