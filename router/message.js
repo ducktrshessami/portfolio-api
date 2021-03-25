@@ -42,7 +42,7 @@ module.exports = function (router) {
     router.post("/message", function (req, res) {
         let validationError;
         if (validationError = findError(req.body)) {
-            res.status(400).end(validationError);
+            res.status(400).send(validationError);
         }
         else {
             let { name, email, message } = req.body;
