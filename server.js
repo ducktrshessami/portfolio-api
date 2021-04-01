@@ -26,6 +26,8 @@ app.use(express.json());
 app.use(require("./router"));
 app.use(require("./public"));
 
+cycle.on("error", console.error);
+
 // It's go time
 app.listen(PORT, () => {
     console.log(`Listening on PORT ${PORT}`);
