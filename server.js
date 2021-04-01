@@ -15,7 +15,7 @@ const cycle = Cycle({
     origin: process.env.PUBLIC_URL,
     ms: 1500000,
     verbose: true,
-    timestamps: true
+    timestamps: false
 });
 
 // App config
