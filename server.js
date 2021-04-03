@@ -20,7 +20,7 @@ const cycle = Cycle({
 
 // App config
 app.use(cycle);
-app.use(cors());
+app.use(cors({ origin: process.env.CORS_ORIGIN }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(require("./router"));
