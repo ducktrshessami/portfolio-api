@@ -31,5 +31,7 @@ cycle.on("error", console.error);
 // It's go time
 app.listen(PORT, () => {
     console.log(`Listening on PORT ${PORT}`);
-    cycle.startLoop();
+    if (process.env.CYCLE && (process.env.CYCLE || "").trim().toLowerCase() !== "false") {
+        cycle.startLoop();
+    }
 });
